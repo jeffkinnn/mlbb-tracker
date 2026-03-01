@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLBB Стат Трекер</title>
+
+  <!--
+    Простой трекер статистики для Mobile Legends: Bang Bang
+    - Чистый HTML / CSS / JS
+    - Фейковые данные по 5 героям
+    - История поисков хранится в localStorage
+  -->
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <div class="app-inner">
+      <!-- ===== ШАПКА ===== -->
+      <header class="header">
+        <div class="title-block">
+          <div class="title">
+            MLBB Stat Tracker
+            <span class="title-badge">Client-side • Demo</span>
+          </div>
+          <div class="subtitle">
+            Локальный трекер статистики по героям Mobile Legends, использующий фейковые данные.
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          LIVE OVERLAY
+        </div>
+      </header>
+
+      <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+      <div class="grid">
+        <!-- Левая колонка: форма + результаты -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Поиск игрока</div>
+              <div class="card-subtitle">Введите Player ID и выберите сервер</div>
+            </div>
+          </div>
+
+          <!-- Форма поиска -->
+          <form id="search-form" class="form">
+            <div class="form-row">
+              <div class="field">
+                <label for="player-id" class="label">Player ID</label>
+                <input
+                  id="player-id"
+                  class="input"
+                  type="text"
+                  placeholder="Например, 123456789"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+
+              <div class="field" style="max-width: 150px;">
+                <label for="server" class="label">Сервер</label>
+                <select id="server" class="select" required>
+                  <option value="RU">RU</option>
+                  <option value="SEA">SEA</option>
+                  <option value="EU">EU</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button type="submit" class="btn-primary">Проверить</button>
+              <div class="hint">
+                Используются <span class="hint-strong">фейковые</span> данные для демонстрации.
+              </div>
+            </div>
+
+            <div id="error-msg" class="error hidden"></div>
+          </form>
+
+          <!-- Блок результатов с таблицей -->
+          <section id="results" class="results hidden">
+            <div class="results-header">
+              <div class="results-title">Глобальная статистика по героям</div>
+              <div class="results-player" id="results-player-label"></div>
+            </div>
+
+            <div class="table-wrapper">
+              <table aria-label="Статистика героев">
+                <thead>
+                  <tr>
+                    <th>Герой</th>
+                    <th>Винрейт</th>
+                    <th>KDA</th>
+                    <th>Матчи</th>
+                  </tr>
+                </thead>
+                <tbody id="stats-body">
+                  <!-- Строки с фейковой статистикой будут добавлены из JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <!-- Правая колонка: история поисков -->
+        <aside class="history-card">
+          <div class="history-header">
+            <div class="history-title">История поисков</div>
+            <button id="clear-history" type="button" class="history-clear">
+              Очистить
+            </button>
+          </div>
+
+          <div id="history-empty" class="history-empty">
+            История пуста. Найдите игрока, чтобы сохранить запрос.
+          </div>
+
+          <div id="history-list" class="history-list">
+            <!-- Элементы истории добавляются из JavaScript -->
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
